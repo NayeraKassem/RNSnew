@@ -11,6 +11,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
+
 import com.example.pc.rnsmodel.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -41,14 +42,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
             mMap.setMyLocationEnabled(true);
             mMap.getUiSettings().setMyLocationButtonEnabled(false);
-            if(Latitude != null){
-            LatLng marker = new LatLng(Latitude, Longitude);
+            if (Latitude != null) {
+                LatLng marker = new LatLng(Latitude, Longitude);
 
-            mMap.addMarker(new MarkerOptions().position(marker).title("Ana henaho"));
-            Log.d(TAG, "testat "+Latitude);
-            moveCamera(new LatLng(marker.latitude,marker.longitude),
-                    DEFAULT_ZOOM);
-        }}
+                mMap.addMarker(new MarkerOptions().position(marker).title("Ana henaho"));
+                Log.d(TAG, "testat " + Latitude);
+                moveCamera(new LatLng(marker.latitude, marker.longitude),
+                        DEFAULT_ZOOM);
+            }
+        }
     }
 
     private static final String TAG = "MapActivity";
@@ -65,15 +67,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     Double Latitude;
     Double Longitude;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         getLocationPermission();
-        if( getIntent().getExtras() != null)
-        {
-             Latitude = getIntent().getDoubleExtra("Latitude",0.00);
-             Longitude = getIntent().getDoubleExtra("Longitude",0.00);
+        if (getIntent().getExtras() != null) {
+            Latitude = getIntent().getDoubleExtra("Latitude", 0.00);
+            Longitude = getIntent().getDoubleExtra("Longitude", 0.00);
 
 //            LatLng marker = new LatLng(Latitude, Longitude);
 //
@@ -83,19 +85,19 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
-    private void getDeviceLocation(){
+    private void getDeviceLocation() {
         Log.d(TAG, "getDeviceLocation: getting the devices current location");
 
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
-        try{
-            if(mLocationPermissionsGranted){
+        try {
+            if (mLocationPermissionsGranted) {
 
                 final Task location = mFusedLocationProviderClient.getLastLocation();
                 location.addOnCompleteListener(new OnCompleteListener() {
                     @Override
                     public void onComplete(@NonNull Task task) {
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             Log.d(TAG, "onComplete: found location!");
 
                             Location currentLocation = (Location) task.getResult();
@@ -103,24 +105,24 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 //                            moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
 //                                    DEFAULT_ZOOM);
 
-                        }else{
+                        } else {
                             Log.d(TAG, "onComplete: current location is null");
                             Toast.makeText(MapsActivity.this, "unable to get current location", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
             }
-        }catch (SecurityException e){
-            Log.e(TAG, "getDeviceLocation: SecurityException: " + e.getMessage() );
+        } catch (SecurityException e) {
+            Log.e(TAG, "getDeviceLocation: SecurityException: " + e.getMessage());
         }
     }
 
-    private void moveCamera(LatLng latLng, float zoom){
-        Log.d(TAG, "moveCamera: moving the camera to: lat: " + latLng.latitude + ", lng: " + latLng.longitude );
+    private void moveCamera(LatLng latLng, float zoom) {
+        Log.d(TAG, "moveCamera: moving the camera to: lat: " + latLng.latitude + ", lng: " + latLng.longitude);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
     }
 
-    private void initMap(){
+    private void initMap() {
         Log.d(TAG, "initMap: initializing map");
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
@@ -128,23 +130,23 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
-    private void getLocationPermission(){
+    private void getLocationPermission() {
         Log.d(TAG, "getLocationPermission: getting location permissions");
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION};
 
-        if(ContextCompat.checkSelfPermission(this.getApplicationContext(),
-                FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-            if(ContextCompat.checkSelfPermission(this.getApplicationContext(),
-                    COURSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+        if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
+                FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
+                    COURSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 mLocationPermissionsGranted = true;
                 initMap();
-            }else{
+            } else {
                 ActivityCompat.requestPermissions(this,
                         permissions,
                         LOCATION_PERMISSION_REQUEST_CODE);
             }
-        }else{
+        } else {
             ActivityCompat.requestPermissions(this,
                     permissions,
                     LOCATION_PERMISSION_REQUEST_CODE);
@@ -156,11 +158,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         Log.d(TAG, "onRequestPermissionsResult: called.");
         mLocationPermissionsGranted = false;
 
-        switch(requestCode){
-            case LOCATION_PERMISSION_REQUEST_CODE:{
-                if(grantResults.length > 0){
-                    for(int i = 0; i < grantResults.length; i++){
-                        if(grantResults[i] != PackageManager.PERMISSION_GRANTED){
+        switch (requestCode) {
+            case LOCATION_PERMISSION_REQUEST_CODE: {
+                if (grantResults.length > 0) {
+                    for (int i = 0; i < grantResults.length; i++) {
+                        if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
                             mLocationPermissionsGranted = false;
                             Log.d(TAG, "onRequestPermissionsResult: permission failed");
                             return;

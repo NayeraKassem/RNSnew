@@ -68,7 +68,9 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     private static final float DEFAULT_ZOOM = 15f;
-
+    String name;
+    String email;
+    String User_id;
     ListView listView;
     Button SortRate;
     List<JSONObject> myJsonArrayAsList;
@@ -126,9 +128,8 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
         HashMap<String, String> user = db.getUserDetails();
 
-        String name = user.get("name");
-        String email = user.get("email");
-
+         name = user.get("name");
+         email = user.get("email");
 
         txtName.setText(name);
         txtEmail.setText(email);
@@ -156,13 +157,22 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
         // Then you start a new Activity via Intent
         Intent intent = new Intent();
-        intent.setClass(MainActivity.this, MapsActivity.class);
+        intent.setClass(MainActivity.this, DetailsActivity.class);
         intent.putExtra("position", position);
         // Or / And
         intent.putExtra("id", id);
         try {
             intent.putExtra("Latitude", myJsonArrayAsList.get(position).getDouble("Latitude"));
             intent.putExtra("Longitude", myJsonArrayAsList.get(position).getDouble("Longitude"));
+            intent.putExtra("Name",myJsonArrayAsList.get(position).getString("Name"));
+            intent.putExtra("rating",myJsonArrayAsList.get(position).getDouble("rating"));
+            intent.putExtra("PhoneNo",myJsonArrayAsList.get(position).getString("Phone Number"));
+            intent.putExtra("ID",myJsonArrayAsList.get(position).getInt("ID"));
+            intent.putExtra("object",myJsonArrayAsList.get(position).toString());
+            intent.putExtra("username",name);
+            intent.putExtra("email", email);
+            intent.putExtra("image path", myJsonArrayAsList.get(position).getString("image path"));
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -223,6 +233,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
 
     private void loadIntoListView(String json) throws JSONException {
+        Log.d(TAG, "reham test" + json);
         JSONArray jsonArray = new JSONArray(json);
         Object[] heroes = new Object[jsonArray.length()];
 

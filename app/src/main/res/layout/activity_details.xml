@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.pc.rnsmodel.activity.DetailsActivity">
+
+    <TextView
+        android:id="@+id/setName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="125dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/setRating"
+        app:layout_constraintEnd_toStartOf="@+id/fabinfo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/setRating"
+        android:layout_width="74dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="125dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="32dp"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/fabinfo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/setName" />
+
+    <TextView
+        android:id="@+id/reviewText"
+        android:layout_width="127dp"
+        android:layout_height="31dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="128dp"
+        android:layout_marginStart="129dp"
+        android:layout_marginTop="48dp"
+        android:text="Add a Review!"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/userReview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/setRating" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/reviewList"
+        app:layout_constraintEnd_toStartOf="@+id/submitReview"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/submitReview"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="16dp"
+        android:text="Submit Review"
+        app:layout_constraintBottom_toTopOf="@+id/reviewList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ratingBar"
+        app:layout_constraintTop_toBottomOf="@+id/userReview" />
+
+    <ListView
+        android:id="@+id/reviewList"
+        android:isScrollContainer="false"
+        android:layout_width="368dp"
+        android:layout_height="175dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/userReview"
+        android:layout_width="218dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="17dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        app:layout_constraintBottom_toTopOf="@+id/ratingBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.225"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabinfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginTop="4dp"
+        android:clickable="true"
+        android:src="@drawable/info"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toTopOf="@+id/locationLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/locationLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:visibility="gone"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/callLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fabinfo">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fablocation"
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="88dp"
+            android:layout_marginStart="108dp"
+            android:layout_marginTop="8dp"
+            android:clickable="true"
+            android:src="@drawable/location"
+            app:fabSize="mini"
+            app:layout_constraintBottom_toTopOf="@+id/reviewText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/fab"
+            app:layout_constraintTop_toBottomOf="@+id/setRating" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/callLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:visibility="gone"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/locationLayout">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="104dp"
+            android:layout_marginTop="8dp"
+            android:clickable="true"
+            android:src="@drawable/call"
+            app:fabSize="mini"
+            app:layout_constraintBottom_toTopOf="@+id/reviewText"
+            app:layout_constraintEnd_toStartOf="@+id/fablocation"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/setRating" />
+
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>
